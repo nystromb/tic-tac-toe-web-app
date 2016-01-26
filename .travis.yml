@@ -1,0 +1,13 @@
+language: node_js
+node_js: stable
+before_script:
+  - coffee -c lib/*.coffee && coffee -c tests/*_tests.coffee
+after_script:
+  - rm lib/*.js && rm tests/*.js
+script:
+  - testem ci --launch PhantomJS
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false

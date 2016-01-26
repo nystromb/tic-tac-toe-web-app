@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  #container.col
+      table.table.table-bordered(border='1')
+        tbody
+          tr
+            td#0.board-space
+            td#1.board-space
+            td#2.board-space
+          tr
+            td#3.board-space
+            td#4.board-space
+            td#5.board-space
+          tr
+            td#6.board-space
+            td#7.board-space
+            td#8.board-space
+
+script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
