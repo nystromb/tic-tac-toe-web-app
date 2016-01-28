@@ -1,7 +1,7 @@
 PlayerMark =
-  NONE: 0
-  X: 1
-  O: 2
+  NONE: "_"
+  X: "x"
+  O: "o"
 
 class GameState
   constructor: (@board, @currentPlayer) ->
@@ -13,11 +13,10 @@ class GameState
   makeMove: (space) ->
     newBoard = @board.slice()
     newBoard[space] = @currentPlayer
-    if @currentPlayer == PlayerMark.X
-      otherPlayer = PlayerMark.O
-    else
-      otherPlayer = PlayerMark.X
-    new GameState(newBoard, otherPlayer)
+    new GameState(newBoard, @otherPlayer())
+
+  otherPlayer: () ->
+    @currentPlayer == PlayerMark.X && PlayerMark.O || PlayerMark.X
 
 this.PlayerMark = PlayerMark
 this.GameState = GameState
