@@ -27,3 +27,17 @@ describe "tic tac toe game state", ->
       gameState = GameState.newGame()
 
       expect(gameState.otherPlayer()).not.toEqual(gameState.currentPlayer)
+
+  describe "checking if a space is available for a move", ->
+
+    it "is true if target space is unmarked", ->
+      gameState = GameState.newGame()
+
+      expect(gameState.spaceIsAvailable(0)).toBe true
+
+    it "is false if target space is marked", ->
+      gameState = GameState.newGame()
+
+      nextGameState = gameState.makeMove(0)
+
+      expect(nextGameState.spaceIsAvailable(0)).toBe false

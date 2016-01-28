@@ -18,5 +18,8 @@ class GameState
   otherPlayer: () ->
     @currentPlayer == PlayerMark.X && PlayerMark.O || PlayerMark.X
 
+  spaceIsAvailable: (space) ->
+    @board[space] == PlayerMark.NONE
+
 this.PlayerMark = PlayerMark
 this.GameState = GameState
