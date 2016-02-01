@@ -4,16 +4,24 @@ PlayerMark =
   O: "o"
 
 class Game
-  constructor: (@board, @currentPlayer) ->
+  constructor: (@api, @board, @currentPlayer) ->
 
-  @newGame: ->
+  @newGame: (api) ->
     _ = PlayerMark.NONE
-    new Game([_, _, _, _, _, _, _, _, _], PlayerMark.X)
+    new Game(api, [_, _, _, _, _, _, _, _, _], PlayerMark.X)
+
+  handleTurn: (playedSpace, updateAction) ->
+    @makeMove(playedSpace)
+    @gameUpdateAction(updateAction)
+    this
 
   makeMove: (space) ->
     @board[space] = @currentPlayer
     @currentPlayer = @otherPlayer()
     this
+
+  gameUpdateAction: (action) ->
+    @api.updateGame(this, action)
 
   otherPlayer: () ->
     @currentPlayer is PlayerMark.X && PlayerMark.O || PlayerMark.X
