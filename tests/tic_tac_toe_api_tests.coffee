@@ -8,7 +8,7 @@ describe "using the tic tac toe web api", ->
 
   it "generates the target URL from given game state", ->
     api = new TicTacToeAPI("http://domain")
-    gameState = GameState.newGame().makeMove(0).makeMove(1)
+    gameState = Game.newGame().makeMove(0).makeMove(1)
     onSuccess = jasmine.createSpy("success handler")
     jasmine.Ajax.stubRequest(api.gameStateURL(gameState))
     api.getAPIGameState(gameState, onSuccess)
@@ -20,7 +20,7 @@ describe "using the tic tac toe web api", ->
 
   it "applies callback to json response data from api on success", ->
     api = new TicTacToeAPI("http://domain")
-    gameState = GameState.newGame()
+    gameState = Game.newGame()
     onSuccess = jasmine.createSpy("success handler")
     responseData = thisIsJson: "ayep"
     jasmine.Ajax.stubRequest(api.gameStateURL(gameState)).andReturn({

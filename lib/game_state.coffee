@@ -3,12 +3,12 @@ PlayerMark =
   X: "x"
   O: "o"
 
-class GameState
+class Game
   constructor: (@board, @currentPlayer) ->
 
   @newGame: ->
     _ = PlayerMark.NONE
-    new GameState([_, _, _, _, _, _, _, _, _], PlayerMark.X)
+    new Game([_, _, _, _, _, _, _, _, _], PlayerMark.X)
 
   makeMove: (space) ->
     @board[space] = @currentPlayer
@@ -22,4 +22,4 @@ class GameState
     @board[space] == PlayerMark.NONE
 
 this.PlayerMark = PlayerMark
-this.GameState = GameState
+this.Game = Game
