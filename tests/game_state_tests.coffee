@@ -6,20 +6,16 @@ describe "tic tac toe game state", ->
 
   describe "making a move", ->
 
-    it "returns a new game state in which the current player has marked the given space", ->
+    it "marks the given space with the current player's mark", ->
       gameState = GameState.newGame()
 
-      nextGameState = gameState.makeMove(0)
+      gameState.makeMove(0)
+      gameState.makeMove(1)
+      gameState.makeMove(2)
 
-      expect(nextGameState.board[0]).toEqual x
-
-    it "returns a new game state in which the other player is now the current player", ->
-      gameState = GameState.newGame()
-
-      nextGameState = gameState.makeMove(0)
-
-      expect(gameState.currentPlayer).toEqual x
-      expect(nextGameState.currentPlayer).toEqual o
+      expect(gameState.board[0]).toEqual x
+      expect(gameState.board[1]).toEqual o
+      expect(gameState.board[2]).toEqual x
 
   describe "getting the other player", ->
 
@@ -38,6 +34,6 @@ describe "tic tac toe game state", ->
     it "is false if target space is marked", ->
       gameState = GameState.newGame()
 
-      nextGameState = gameState.makeMove(0)
+      gameState.makeMove(0)
 
-      expect(nextGameState.spaceIsAvailable(0)).toBe false
+      expect(gameState.spaceIsAvailable(0)).toBe false
