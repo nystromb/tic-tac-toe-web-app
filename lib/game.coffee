@@ -16,10 +16,10 @@ class Game
     this
 
   otherPlayer: () ->
-    @currentPlayer == PlayerMark.X && PlayerMark.O || PlayerMark.X
+    @currentPlayer is PlayerMark.X && PlayerMark.O || PlayerMark.X
 
   spaceIsAvailable: (space) ->
-    @board[space] == PlayerMark.NONE
+    @board[space] is PlayerMark.NONE
 
 this.PlayerMark = PlayerMark
 this.Game = Game

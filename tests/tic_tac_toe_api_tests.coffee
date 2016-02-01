@@ -7,11 +7,10 @@ describe "using the tic tac toe web api", ->
     jasmine.Ajax.uninstall()
 
   it "generates the target URL from given game state", ->
-    api = new TicTacToeAPI("http://domain")
-    gameState = Game.newGame().makeMove(0).makeMove(1)
-    onSuccess = jasmine.createSpy("success handler")
-    jasmine.Ajax.stubRequest(api.gameStateURL(gameState))
-    api.getAPIGameState(gameState, onSuccess)
+    api = new TicTacToeAPI("http://domain", ->)
+    game = Game.newGame().makeMove(0).makeMove(1)
+    jasmine.Ajax.stubRequest(api.targetURL(game))
+    api.updateGame(game)
 
     url = jasmine.Ajax.requests.mostRecent().url
 
@@ -19,14 +18,15 @@ describe "using the tic tac toe web api", ->
 
 
   it "applies callback to json response data from api on success", ->
-    api = new TicTacToeAPI("http://domain")
-    gameState = Game.newGame()
     onSuccess = jasmine.createSpy("success handler")
+    api = new TicTacToeAPI("http://domain", onSuccess)
+    game = Game.newGame()
+
     responseData = thisIsJson: "ayep"
-    jasmine.Ajax.stubRequest(api.gameStateURL(gameState)).andReturn({
+    jasmine.Ajax.stubRequest(api.targetURL(game)).andReturn({
       "responseText": JSON.stringify(responseData)
     })
 
-    api.getAPIGameState(gameState, onSuccess)
+    api.updateGame(game)
 
     expect(onSuccess).toHaveBeenCalledWith(responseData)

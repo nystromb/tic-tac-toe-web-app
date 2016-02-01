@@ -1,18 +1,18 @@
 describe "game prompt", ->
 
-  makeMoves = (gameState, spaces) ->
-    gameState.makeMove(space) for space in spaces
-    gameState
+  makeMoves = (game, spaces) ->
+    game.makeMove(space) for space in spaces
+    game
 
   describe "getting a prompt for a given game state", ->
 
     it "tells the current player it is their turn", ->
       prompt = new GamePrompt()
-      gameState = Game.newGame()
+      game = Game.newGame()
 
-      expect(prompt.textFor(gameState, "inProgress")).toEqual "It's player x's turn:"
-      expect(prompt.textFor(gameState.makeMove(0), "inProgress")).toEqual "It's player o's turn:"
-      expect(prompt.textFor(gameState.makeMove(1), "inProgress")).toEqual "It's player x's turn:"
+      expect(prompt.textFor(game, "inProgress")).toEqual "It's player x's turn:"
+      expect(prompt.textFor(game.makeMove(0), "inProgress")).toEqual "It's player o's turn:"
+      expect(prompt.textFor(game.makeMove(1), "inProgress")).toEqual "It's player x's turn:"
 
     it "tells if player x won the game", ->
       prompt = new GamePrompt()

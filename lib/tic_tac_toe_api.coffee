@@ -1,14 +1,15 @@
 class TicTacToeAPI
-  constructor: (@rootURL) ->
+  constructor: (@rootURL, @successHandler) ->
 
-  gameStateURL: (gameState) ->
-    "#{@rootURL}?current_player=#{gameState.currentPlayer}&board=#{gameState.board.join()}"
+  targetURL: (game) ->
+    "#{@rootURL}?current_player=#{game.currentPlayer}&board=#{game.board.join()}"
 
-  getAPIGameState: (gameState, onSuccess) ->
+  updateGame: (game) ->
+    callback = @successHandler
     $.ajax
-      url: @gameStateURL(gameState)
+      url: @targetURL(game)
       dataType: "json"
       success: (data, textStatus, jqXHR) ->
-        onSuccess(data)
+        callback(data)
 
 this.TicTacToeAPI = TicTacToeAPI

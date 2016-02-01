@@ -1,12 +1,12 @@
 class GamePrompt
   constructor: ->
 
-  textFor: (gameState, gameStatus) ->
+  textFor: (game, gameStatus) ->
     if gameStatus is "won"
-      "Player #{gameState.otherPlayer()} won."
+      "Player #{game.otherPlayer()} won."
     else if gameStatus is "tied"
       "Y'all tied. Maybe go play another game."
     else
-      "It's player " + gameState.currentPlayer + "'s turn:"
+      "It's player " + game.currentPlayer + "'s turn:"
 
 this.GamePrompt = GamePrompt
