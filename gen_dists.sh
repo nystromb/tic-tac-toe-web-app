@@ -1,5 +1,6 @@
 #!/bin/bash
 {
+  cd "${BASH_SOURCE%/*}" || exit
   mkdir -p dist/js dist/css
 
   jade views/index.jade --out dist/
