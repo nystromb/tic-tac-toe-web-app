@@ -23,7 +23,7 @@ class Game
   gameUpdateAction: (action) ->
     @api.updateGame(this, action)
 
-  otherPlayer: () ->
+  otherPlayer: ->
     @currentPlayer is PlayerMark.X && PlayerMark.O || PlayerMark.X
 
   spaceIsAvailable: (space) ->
