@@ -50,7 +50,7 @@ describe "game view updates", ->
     it "reenables marking spaces after updating game", ->
       firstBoardSpace = $("#0")
       secondBoardSpace = $("#1")
-      api = new ManualTriggerMockAPI("")
+      api = new ManualTriggerMockAPI(gameState: "inProgress")
       game = Game.newGame(api)
       view = new GameView(game)
 
@@ -60,6 +60,18 @@ describe "game view updates", ->
       secondBoardSpace.click()
 
       expect(secondBoardSpace.html()).toEqual expectedMark
+
+    it "prevents marking spaces after the game is over", ->
+      firstBoardSpace = $("#0")
+      secondBoardSpace = $("#1")
+      api = new MockAPI(gameState: "won")
+      game = Game.newGame(api)
+      view = new GameView(game)
+
+      firstBoardSpace.click()
+      secondBoardSpace.click()
+
+      expect(secondBoardSpace.html()).toEqual "_"
 
   describe "updating the game prompt", ->
 

@@ -13,7 +13,7 @@ class GameView
 
   updateView: (apiResponse) =>
     @updatePrompt(apiResponse.gameState)
-    @enableBoardInput()
+    @enableBoardInput() if apiResponse.gameState is "inProgress"
 
   markSpace: (space) ->
     $(space).html(@game.currentPlayer)
