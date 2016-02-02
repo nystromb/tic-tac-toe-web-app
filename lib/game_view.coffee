@@ -9,7 +9,14 @@ class GameView
     if @game.spaceIsAvailable(selectedSpace.id)
       @markSpace(selectedSpace)
       @disableBoardInput()
-      @game.handleTurn(selectedSpace.id, @updateView)
+      @game.handleTurn(selectedSpace.id, @handleComputerTurn)
+
+  handleComputerTurn: (apiResponse) =>
+    if apiResponse.gameState is "inProgress"
+      @markSpace("##{apiResponse.bestMove}")
+      @game.handleTurn(apiResponse.bestMove, @updateView)
+    else
+      @updateView(apiResponse)
 
   updateView: (apiResponse) =>
     @updatePrompt(apiResponse.gameState)
