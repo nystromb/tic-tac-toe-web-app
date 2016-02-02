@@ -10,19 +10,21 @@ block content
       table.table.table-bordered(border="1")
         tbody
           tr
-            td#0.board-space= "_"
-            td#1.board-space= "_"
-            td#2.board-space= "_"
+            td#0.unmarked-space= "_"
+            td#1.unmarked-space= "_"
+            td#2.unmarked-space= "_"
           tr
-            td#3.board-space= "_"
-            td#4.board-space= "_"
-            td#5.board-space= "_"
+            td#3.unmarked-space= "_"
+            td#4.unmarked-space= "_"
+            td#5.unmarked-space= "_"
           tr
-            td#6.board-space= "_"
-            td#7.board-space= "_"
-            td#8.board-space= "_"
+            td#6.unmarked-space= "_"
+            td#7.unmarked-space= "_"
+            td#8.unmarked-space= "_"
 
-  button.reset-button.btn-danger.btn-lg Reset 
-    span.glyphicon.glyphicon-refresh
-
-script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
+  script(src="javascripts/game.js")
+  script(src="javascripts/game_prompt.js")
+  script(src="javascripts/tic_tac_toe_api.js")
+  script(src="javascripts/game_view.js")
+  script(src="javascripts/main.js")

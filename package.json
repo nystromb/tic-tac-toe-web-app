@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "coffee -c -o ./public/javascripts/ ./lib/*.coffee && coffee ./bin/www",
-    "test": "testem"
+    "start": "coffee -c -o ./public/javascripts/ ./lib/*.coffee && coffee ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.10.2",
