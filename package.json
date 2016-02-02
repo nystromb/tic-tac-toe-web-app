@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "coffee -c -o ./public/javascripts/ ./lib/*.coffee && coffee ./bin/www"
+    "start": "./gen_dists.sh && cp dist/javascripts/tttapp.js public/javascripts/ && coffee bin/www"
   },
   "dependencies": {
     "body-parser": "~1.10.2",
