@@ -5,15 +5,15 @@ class GameView
     @enableBoardInput()
 
   handlePlayerMove: (event) =>
-    selectedSpace = event.target
-    if @game.spaceIsAvailable(selectedSpace.id)
+    selectedSpace = $(event.target)
+    if @game.spaceIsAvailable(selectedSpace.data("space-id"))
       @markSpace(selectedSpace)
       @disableBoardInput()
-      @game.handleTurn(selectedSpace.id, @handleComputerTurn)
+      @game.handleTurn(selectedSpace.data("space-id"), @handleComputerTurn)
 
   handleComputerTurn: (apiResponse) =>
     if apiResponse.gameState is "inProgress"
-      @markSpace("##{apiResponse.bestMove}")
+      @markSpace($("[data-space-id=#{apiResponse.bestMove}]"))
       @game.handleTurn(apiResponse.bestMove, @updateView)
     else
       @updateView(apiResponse)
@@ -23,14 +23,14 @@ class GameView
     @enableBoardInput() if apiResponse.gameState is "inProgress"
 
   markSpace: (space) ->
-    $(space).html(@game.currentPlayer)
-    $(space).toggleClass("unmarked-space marked-space")
+    space.attr("data-status", "marked")
+    space.html(@game.currentPlayer)
 
   disableBoardInput: ->
-    $(".unmarked-space").off()
+    $("[data-status=unmarked]").off()
 
   enableBoardInput: ->
-    $(".unmarked-space").on("click", @handlePlayerMove)
+    $("[data-status=unmarked]").on("click", @handlePlayerMove)
 
   updatePrompt: (gameStatus) ->
     $(".prompt").text(@prompt.textFor(@game, gameStatus))
