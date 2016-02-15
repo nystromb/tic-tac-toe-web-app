@@ -7,20 +7,20 @@ block content
   h3.prompt Prompt
 
   #container.row.board
-      table.table.table-bordered(border="1")
-        tbody
-          tr
-            td#0.unmarked-space= "_"
-            td#1.unmarked-space= "_"
-            td#2.unmarked-space= "_"
-          tr
-            td#3.unmarked-space= "_"
-            td#4.unmarked-space= "_"
-            td#5.unmarked-space= "_"
-          tr
-            td#6.unmarked-space= "_"
-            td#7.unmarked-space= "_"
-            td#8.unmarked-space= "_"
+    table.table.table-bordered(border="1")
+      tbody
+        tr
+          td(data-space-id="0")&attributes({'data-status': 'unmarked'})= "_"
+          td(data-space-id="1")&attributes({'data-status': 'unmarked'})= "_"
+          td(data-space-id="2")&attributes({'data-status': 'unmarked'})= "_"
+        tr
+          td(data-space-id="3")&attributes({'data-status': 'unmarked'})= "_"
+          td(data-space-id="4")&attributes({'data-status': 'unmarked'})= "_"
+          td(data-space-id="5")&attributes({'data-status': 'unmarked'})= "_"
+        tr
+          td(data-space-id="6")&attributes({'data-status': 'unmarked'})= "_"
+          td(data-space-id="7")&attributes({'data-status': 'unmarked'})= "_"
+          td(data-space-id="8")&attributes({'data-status': 'unmarked'})= "_"
 
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js")
   script(src="javascripts/game_prompt.js")
