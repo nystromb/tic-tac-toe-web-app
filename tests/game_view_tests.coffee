@@ -1,23 +1,29 @@
 class MockAPI
   constructor: (@responseDataToUse) ->
 
-  updateGame: (game, updateAction) ->
-    updateAction(@responseDataToUse)
+  setErrorHandler: (@errorHandler) ->
+
+  updateGame: (game, successHandler) ->
+    successHandler(@responseDataToUse)
 
 class ManualTriggerMockAPI
   constructor: (@responseDataToUse) ->
 
-  updateGame: (game, updateAction) ->
-    @updateAction = updateAction
+  setErrorHandler: (@errorHandler) ->
+
+  updateGame: (game, successHandler) ->
+    @successHandler = successHandler
 
   triggerGameUpdate: ->
-    @updateAction(@responseDataToUse)
-    @updateAction(@responseDataToUse)
+    @successHandler(@responseDataToUse)
+    @successHandler(@responseDataToUse)
 
 describe "game view updates", ->
 
   beforeEach ->
-    setFixtures('<h3 class="prompt">foo</h3>' +
+    setFixtures(
+      '<h3 class="prompt">foo</h3>' +
+      '<div id="alerts"></div>' +
       '<table><tr><td data-space-id="0" data-status="unmarked">_</td>' +
       '<td data-space-id="1" data-status="unmarked">_</td></tr></table>')
     @firstBoardSpace = $("[data-space-id=0]")
@@ -97,6 +103,16 @@ describe "game view updates", ->
       @firstBoardSpace.click()
 
       expect(@secondBoardSpace.text()).toEqual "_"
+
+    it "shows an alert when it cannot get the computer move from the api", ->
+      api = new MockAPI()
+      view = new GameView(Game.newGame(api))
+
+      api.errorHandler()
+
+      expect($("#alerts").html()).toContain('<div class="alert alert-danger" role="alert">')
+      expect($("#alerts").html()).toContain("The application failed to receive a move from the " +
+        "computer player. Refresh the page to try again.")
 
   describe "updating the game prompt", ->
 

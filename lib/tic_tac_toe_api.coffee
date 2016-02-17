@@ -1,6 +1,8 @@
 class TicTacToeAPI
   constructor: (@rootURL) ->
 
+  setErrorHandler: (@errorHandler) ->
+
   targetURL: (game) ->
     "#{@rootURL}?current_player=#{game.currentPlayer}&board=#{game.board.join()}"
 
@@ -10,5 +12,7 @@ class TicTacToeAPI
       dataType: "json"
       success: (data, textStatus, jqXHR) ->
         successHandler(data)
+      error: (jqXHR, textStatus, errorMessage) =>
+        @errorHandler()
 
 this.TicTacToeAPI = TicTacToeAPI
