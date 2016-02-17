@@ -1,5 +1,6 @@
 class GameView
   constructor: (@game) ->
+    @game.api.setErrorHandler(@handleComputerMoveFailure)
     @prompt = new GamePrompt()
     @updatePrompt("inProgress")
     @enableBoardInput()
@@ -17,6 +18,13 @@ class GameView
       @game.handleTurn(apiResponse.bestMove, @updateView)
     else
       @updateView(apiResponse)
+
+  handleComputerMoveFailure: ->
+    $("#alerts").html(
+      '<div class="alert alert-danger" role="alert">' +
+      "The application failed to receive a move from the computer player. " +
+      "Refresh the page to try again." +
+      '</div>')
 
   updateView: (apiResponse) =>
     @updatePrompt(apiResponse.gameState)
