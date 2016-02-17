@@ -34,14 +34,15 @@ a {
   margin-left: 1%;
 }
 
-.marked-space {
+[data-status="marked"] {
   color: black;
 }
 
-.unmarked-space {
+[data-status="unmarked"] {
   color: white;
 }
 
-.unmarked-space:hover {
+[data-status="unmarked"]:hover {
   color: #EEE;
   background-color: #EEE;
+}
